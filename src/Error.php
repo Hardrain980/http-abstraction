@@ -3,7 +3,7 @@
 namespace Leo\Http;
 
 use \Psr\Http\Message\ResponseInterface;
-use \GuzzleHttp\Psr7;
+use \Nyholm\Psr7;
 
 class Error extends \Exception implements ToResponseInterface
 {
@@ -82,7 +82,7 @@ class Error extends \Exception implements ToResponseInterface
 		$response = (new Psr7\Response())
 			->withStatus($this->status, strval($phrase))
 			->withHeader('Content-Type', 'text/plain')
-			->withBody(Psr7\Utils::streamFor($body));
+			->withBody(Psr7\Stream::create($body));
 
 		foreach ($this->headers as $key => $value)
 			$response = $response

@@ -3,7 +3,7 @@
 namespace Leo\Http;
 
 use \Psr\Http\Message\ResponseInterface;
-use \GuzzleHttp\Psr7;
+use \Nyholm\Psr7;
 
 class Redirect extends \Exception implements ToResponseInterface
 {

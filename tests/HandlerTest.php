@@ -3,7 +3,7 @@
 use \Leo\Http\Handler;
 use \Leo\Fixtures\DummyLogger;
 use \PHPUnit\Framework\TestCase;
-use \GuzzleHttp\Psr7;
+use \Nyholm\Psr7;
 
 /**
  * @testdox \Leo\Http\Handler
@@ -19,13 +19,13 @@ class HandlerTest extends TestCase
 				return (new Psr7\Response())
 					->withStatus(200, 'OK')
 					->withHeader('Content-Type', 'text/plain')
-					->withBody(Psr7\Utils::streamFor('Hello'));
+					->withBody(Psr7\Stream::create('Hello'));
 			})
 			->addRoute('/405', function ($r) {
 				return (new Psr7\Response())
 					->withStatus(200, 'OK')
 					->withHeader('Content-Type', 'text/plain')
-					->withBody(Psr7\Utils::streamFor('Hello, to a POST request.'));
+					->withBody(Psr7\Stream::create('Hello, to a POST request.'));
 			}, ['POST'])
 			->addRoute('/500', function ($r) {
 				throw new Exception('Ooops...');

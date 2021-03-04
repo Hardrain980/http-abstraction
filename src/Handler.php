@@ -9,7 +9,7 @@ use \Psr\Log\LoggerInterface;
 use \Psr\Http\Message\ServerRequestInterface;
 use \Psr\Http\Message\ResponseInterface;
 use \Psr\Http\Server\RequestHandlerInterface;
-use \GuzzleHttp\Psr7;
+use \Nyholm\Psr7;
 
 class Handler implements RequestHandlerInterface
 {
@@ -80,7 +80,7 @@ class Handler implements RequestHandlerInterface
 			$response = (new Psr7\Response())
 				->withStatus(500, 'Internal Server Error')
 				->withHeader('Content-Type', 'text/plain')
-				->withBody(Psr7\Utils::streamFor($body));
+				->withBody(Psr7\Stream::create($body));
 		}
 
 		return $response;
